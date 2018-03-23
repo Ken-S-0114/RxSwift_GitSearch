@@ -6,9 +6,9 @@
 //  Copyright © 2018年 佐藤賢. All rights reserved.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
+import ObjectMapper
+import RxAlamofire
 
-struct RepositoriesViewModel {
 
-
-}

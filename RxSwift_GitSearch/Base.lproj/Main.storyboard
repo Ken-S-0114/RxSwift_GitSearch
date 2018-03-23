@@ -86,6 +86,10 @@
                         <viewLayoutGuide key="safeArea" id="fFa-YP-4Io"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search repos for username" id="SRw-jB-6P4"/>
+                    <connections>
+                        <outlet property="nameSearchBar" destination="uFz-YU-ZZR" id="KqG-B3-Obf"/>
+                        <outlet property="repositoryListTableView" destination="YjF-8e-0CA" id="6Id-26-P9g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W9A-ut-6y9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
