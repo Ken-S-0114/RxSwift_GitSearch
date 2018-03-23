@@ -40,14 +40,16 @@ final class RepositoryListController: UIViewController {
   
   // ViewModelを経由してGithubの情報を取得してテーブルビューに検索結果を表示する
   private func setupRx() {
-    // メンバ変数の初期化（検索バーでの入力値の更新をトリガーにしてViewModel側に設置した処理を行う）
-    // (フロー1) → 検索バーでの入力値の更新が「データ取得のトリガー」になるので、ViewModel側に定義したfetchRepositories()メソッドが実行される
-    // (フロー2) → fetchRepositories()メソッドが実行後は、ViewModel側に定義したメンバ変数rx_repositoriesに値が格納される
+    /**
+     * メンバ変数の初期化（検索バーでの入力値の更新をトリガーにしてViewModel側に設置した処理を行う）
+     *
+     * (フロー1) → 検索バーでの入力値の更新が「データ取得のトリガー」になるので、ViewModel側に定義したfetchRepositories()メソッドが実行される
+     * (フロー2) → fetchRepositories()メソッドが実行後は、ViewModel側に定義したメンバ変数rx_repositoriesに値が格納される
+     */
+    
     repositoriesViewModel = RepositoriesViewModel(withNameObservable: rx_searchBarText)
     
     /**
-     *（UI表示に関する処理の流れの概要）
-     *
      * リクエストをして結果が更新されるたびにDriverからはobserverに対して通知が行われ、
      * driveメソッドでバインドしている各UIの更新が働くようにしている。
      *
@@ -71,12 +73,12 @@ final class RepositoryListController: UIViewController {
     repositoriesViewModel
     .rx_repositories
     .drive(onNext: { repositories in
-       //データ取得ができなかった場合だけ処理をする
+       // データ取得ができなかった場合にのみ, Alertを表示させる
       if repositories.count == 0 {
         let alert = UIAlertController(title: ":(", message: "No repositories for this user.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        //ポップアップを閉じる
+        // ポップアップを閉じる
         if self.navigationController?.visibleViewController is UIAlertController != true {
           self.present(alert, animated: true, completion: nil)
         }
@@ -85,7 +87,7 @@ final class RepositoryListController: UIViewController {
     .disposed(by: disposeBag)
   }
   
-  // 画面設定
+  // 画面に対する初期設定
   private func setupUI() {
     let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped(_:)))
     repositoryListTableView.addGestureRecognizer(tap)
@@ -119,7 +121,7 @@ final class RepositoryListController: UIViewController {
     })
   }
   
-  // キーボード非表示表示時に発動されるメソッド
+  // キーボード非表示時に発動されるメソッド
   @objc private func keyboardWillHide(_ notification: Notification) {
     
     // 一覧表示用テーブルビューのAutoLayoutの制約を更新して高さを元に戻す

@@ -16,7 +16,7 @@ class Repository: Mappable {
   
   required init?(map: Map) {}
   
-  //ObjectMapperを利用したデータのマッピング
+  // ObjectMapperを利用したデータのマッピング
   func mapping(map: Map) {
     identifier <- map["id"]
     html_url <- map["html_url"]

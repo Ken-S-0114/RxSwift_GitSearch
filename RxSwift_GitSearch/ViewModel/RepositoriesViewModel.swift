@@ -11,14 +11,15 @@ import RxCocoa
 import ObjectMapper
 import RxAlamofire
 
+
 struct RepositoriesViewModel {
-  
+
   lazy var rx_repositories: Driver<[Repository]> = self.fetchRepositories()
   
-  //監視対象のメンバ変数
+  // 監視対象のメンバ変数
   fileprivate var repositoryName: Observable<String>
   
-  //監視対象の変数初期化処理(イニシャライザ)
+  // 監視対象の変数初期化処理(イニシャライザ)
   init(withNameObservable nameObservable: Observable<String>) {
     self.repositoryName = nameObservable
   }
@@ -28,14 +29,14 @@ struct RepositoriesViewModel {
     // Observableな変数に対して、「.subscribeOn」→「.observeOn」→「.observeOn」...という形で数珠つなぎで処理を実行
     return repositoryName
       
-      //処理Phase1: 見た目に関する処理
+      // 処理Phase1: 見た目に関する処理
       .subscribeOn(MainScheduler.instance)
       .do(onNext: { response in
         //ネットワークインジケータを表示状態にする
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
       })
       
-      //処理Phase2: 下記のAPI(GithubAPI)のエンドポイントへRxAlamofire経由でのアクセスをする
+      // 処理Phase2: 下記のAPI(GithubAPI)のエンドポイントへRxAlamofire経由でのアクセスをする
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
       .flatMapLatest { text in
         // APIからデータを取得する
@@ -48,7 +49,7 @@ struct RepositoriesViewModel {
         }
       }
       
-      //処理Phase3: ModelクラスとObjectMapperで定義した形のデータを作成する
+      // 処理Phase3: ModelクラスとObjectMapperで定義した形のデータを作成する
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
       .map { (response, json) -> [Repository] in
         // APIからレスポンスが取得できた場合には, Modelクラスに定義した形のデータを返却する
@@ -58,7 +59,8 @@ struct RepositoriesViewModel {
           return []
         }
       }
-      //処理Phase4: データが受け取れた際の見た目に関する処理とDriver変換
+      
+      // 処理Phase4: データが受け取れた際の見た目に関する処理とDriver変換
       .observeOn(MainScheduler.instance)
       .do(onNext: { response in
         //ネットワークインジケータを非表示状態にする
