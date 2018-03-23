@@ -20,10 +20,10 @@ final class RepositoryListController: UIViewController {
   
   let disposeBag = DisposeBag()
   
-  //ViewModelのインスタンス格納用のメンバ変数
+  // ViewModelのインスタンス格納用のメンバ変数
   var repositoriesViewModel: RepositoriesViewModel!
   
-  //検索ボックスの値変化を監視対象にする（テキストが空っぽの場合はデータ取得を行わない）
+  // 検索ボックスの値変化を監視対象にする.（テキストが空っぽの場合はデータ取得を行わない）また, 0.5秒のバッファを持たせる
   var rx_searchBarText: Observable<String> {
     return nameSearchBar.rx.text
             .filter { $0 != nil }
@@ -34,14 +34,79 @@ final class RepositoryListController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupRx()
+    setupUI()
   }
   
-  //ViewModelを経由してGithubの情報を取得してテーブルビューに検索結果を表示する
+  // ViewModelを経由してGithubの情報を取得してテーブルビューに検索結果を表示する
   private func setupRx() {
-
+    // メンバ変数の初期化（検索バーでの入力値の更新をトリガーにしてViewModel側に設置した処理を行う）
+    // (フロー1) → 検索バーでの入力値の更新が「データ取得のトリガー」になるので、ViewModel側に定義したfetchRepositories()メソッドが実行される
+    // (フロー2) → fetchRepositories()メソッドが実行後は、ViewModel側に定義したメンバ変数rx_repositoriesに値が格納される
+    repositoriesViewModel = RepositoriesViewModel(withNameObservable: rx_searchBarText)
   }
   
+  // 画面設定
   private func setupUI() {
-//    let tap = UITapGestureRecognizer
+    let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped(_:)))
+    repositoryListTableView.addGestureRecognizer(tap)
+    
+    // キーボードのイベントを監視対象にする
+    // Case1. キーボードを開いた場合のイベント
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShow(_:)),
+      name: NSNotification.Name.UIKeyboardWillShow,
+      object: nil)
+    
+     // Case2. キーボードを閉じた場合のイベント
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillHide(_:)),
+      name: NSNotification.Name.UIKeyboardWillHide,
+      object: nil)
+  }
+  
+  // キーボード表示時に発動されるメソッド
+  @objc private func keyboardWillShow(_ notification: Notification) {
+    // キーボードのサイズを取得する
+    guard let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+      return
+    }
+    // 一覧表示用テーブルビューのAutoLayoutの制約を更新して高さをキーボード分だけ縮める
+    tableViewBottomConstraint.constant = keyboardFrame.height
+    UIView.animate(withDuration: 0.3, animations: {
+      self.view.updateConstraints()
+      })
+  }
+  
+  // キーボード非表示表示時に発動されるメソッド
+  @objc private func keyboardWillHide(_ notification: Notification) {
+    
+    // 一覧表示用テーブルビューのAutoLayoutの制約を更新して高さを元に戻す
+    tableViewBottomConstraint.constant = 0.0
+    UIView.animate(withDuration: 0.3, animations: {
+      self.view.updateConstraints()
+    })
+  }
+  
+  // テーブルビューのセルタップ時に発動されるメソッド
+  @objc private func tableTapped(_ recognizer: UITapGestureRecognizer) {
+    // どのセルがタップされたかを探知する
+    let location = recognizer.location(in: repositoryListTableView)
+    let path = repositoryListTableView.indexPathForRow(at: location)
+    
+    // キーボードが表示されているか否かで処理を分ける
+    if nameSearchBar.isFirstResponder {
+      // キーボードを閉じる
+      nameSearchBar.resignFirstResponder()
+    } else if let path = path {
+      // タップされたセルを中央位置に持ってくる
+      repositoryListTableView.selectRow(at: path, animated: true, scrollPosition: .middle)
+    }
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
   }
 }

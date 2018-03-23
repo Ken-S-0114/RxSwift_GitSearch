@@ -12,10 +12,12 @@ import ObjectMapper
 import RxAlamofire
 
 struct RepositoriesViewModel {
+  
   lazy var rx_repositories: Driver<[Repository]> = self.fetchRepositories()
   
   //監視対象のメンバ変数
   fileprivate var repositoryName: Observable<String>
+  
   //監視対象の変数初期化処理(イニシャライザ)
   init(withNameObservable nameObservable: Observable<String>) {
     self.repositoryName = nameObservable
