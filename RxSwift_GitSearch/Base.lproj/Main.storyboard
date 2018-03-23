@@ -75,20 +75,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fFa-YP-4Io" firstAttribute="bottom" secondItem="YjF-8e-0CA" secondAttribute="bottom" id="2Sq-9H-CIt"/>
-                            <constraint firstItem="uFz-YU-ZZR" firstAttribute="trailing" secondItem="fFa-YP-4Io" secondAttribute="trailing" id="88k-c0-K38"/>
-                            <constraint firstItem="YjF-8e-0CA" firstAttribute="top" secondItem="uFz-YU-ZZR" secondAttribute="bottom" id="FcN-X0-OoU"/>
-                            <constraint firstItem="fFa-YP-4Io" firstAttribute="trailing" secondItem="YjF-8e-0CA" secondAttribute="trailing" id="GZY-3U-QPT"/>
-                            <constraint firstItem="uFz-YU-ZZR" firstAttribute="leading" secondItem="fFa-YP-4Io" secondAttribute="leading" id="iVq-7d-PG3"/>
-                            <constraint firstItem="YjF-8e-0CA" firstAttribute="leading" secondItem="fFa-YP-4Io" secondAttribute="leading" id="nZ8-z3-lf4"/>
-                            <constraint firstItem="uFz-YU-ZZR" firstAttribute="top" secondItem="fFa-YP-4Io" secondAttribute="top" id="xqD-7q-zSM"/>
+                            <constraint firstItem="uFz-YU-ZZR" firstAttribute="leading" secondItem="fFa-YP-4Io" secondAttribute="leading" id="BDL-fk-hyh"/>
+                            <constraint firstItem="uFz-YU-ZZR" firstAttribute="top" secondItem="fFa-YP-4Io" secondAttribute="top" id="PyR-yW-KcP"/>
+                            <constraint firstItem="YjF-8e-0CA" firstAttribute="bottom" secondItem="fFa-YP-4Io" secondAttribute="bottom" id="T3X-Kh-Cc1"/>
+                            <constraint firstItem="YjF-8e-0CA" firstAttribute="trailing" secondItem="fFa-YP-4Io" secondAttribute="trailing" id="Tjq-k9-RQC"/>
+                            <constraint firstItem="YjF-8e-0CA" firstAttribute="leading" secondItem="fFa-YP-4Io" secondAttribute="leading" id="X6z-qX-Qbu"/>
+                            <constraint firstItem="YjF-8e-0CA" firstAttribute="top" secondItem="uFz-YU-ZZR" secondAttribute="bottom" id="YVr-WT-D5k"/>
+                            <constraint firstItem="uFz-YU-ZZR" firstAttribute="trailing" secondItem="fFa-YP-4Io" secondAttribute="trailing" id="gTI-qX-lWo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fFa-YP-4Io"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search repos for username" id="SRw-jB-6P4"/>
                     <connections>
-                        <outlet property="nameSearchBar" destination="uFz-YU-ZZR" id="KqG-B3-Obf"/>
-                        <outlet property="repositoryListTableView" destination="YjF-8e-0CA" id="6Id-26-P9g"/>
+                        <outlet property="nameSearchBar" destination="uFz-YU-ZZR" id="0pL-FS-ASC"/>
+                        <outlet property="repositoryListTableView" destination="YjF-8e-0CA" id="swQ-RP-MqH"/>
+                        <outlet property="tableViewBottomConstraint" destination="T3X-Kh-Cc1" id="3mo-l7-rfV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W9A-ut-6y9" userLabel="First Responder" sceneMemberID="firstResponder"/>

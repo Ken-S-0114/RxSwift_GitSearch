@@ -8,3 +8,18 @@
 
 import ObjectMapper
 
+class Repository: Mappable {
+  
+  var identifier: Int!
+  var html_url: String!
+  var name: String!
+  
+  required init?(map: Map) {}
+  
+  //ObjectMapperを利用したデータのマッピング
+  func mapping(map: Map) {
+    identifier <- map["id"]
+    html_url <- map["html_url"]
+    name <- map["name"]
+  }
+}
