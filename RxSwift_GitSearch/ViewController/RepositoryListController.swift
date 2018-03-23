@@ -18,6 +18,7 @@ final class RepositoryListController: UIViewController {
   @IBOutlet weak var repositoryListTableView: UITableView!
   @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
   
+  // 観測対象のオブジェクトの一括解放用
   let disposeBag = DisposeBag()
   
   // ViewModelのインスタンス格納用のメンバ変数
