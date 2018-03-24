@@ -30,7 +30,8 @@ final class RepositoryListController: UIViewController {
       .filter { $0 != nil }
       .map { $0! }
       .filter { $0.count > 0 }
-      .debounce(0.5, scheduler: MainScheduler.instance).distinctUntilChanged()
+      .debounce(0.5, scheduler: MainScheduler.instance)
+      .distinctUntilChanged()
   }
   
   override func viewDidLoad() {
@@ -47,8 +48,8 @@ final class RepositoryListController: UIViewController {
      * (フロー1) → 検索バーでの入力値の更新が「データ取得のトリガー」になるので、ViewModel側に定義したfetchRepositories()メソッドが実行される
      * (フロー2) → fetchRepositories()メソッドが実行後は、ViewModel側に定義したメンバ変数rx_repositoriesに値が格納される
      */
-    
     repositoriesViewModel = RepositoriesViewModel(withNameObservable: rx_searchBarText)
+    
     
     /**
      * リクエストをして結果が更新されるたびにDriverからはobserverに対して通知が行われ、
@@ -57,7 +58,6 @@ final class RepositoryListController: UIViewController {
      * (フロー1) → テーブルビューへの一覧表示
      * (フロー2) → 該当データが0件の場合のポップアップ表示
      */
-    
     // リクエストした結果の更新を元に表示に関する処理を行う（テーブルビューへのデータ一覧の表示処理）
     repositoriesViewModel
       .rx_repositories
@@ -130,6 +130,11 @@ final class RepositoryListController: UIViewController {
     UIView.animate(withDuration: 0.3, animations: {
       self.view.updateConstraints()
     })
+  }
+  
+  //メモリ解放時にキーボードのイベント監視対象から除外する
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
   
   // テーブルビューのセルタップ時に発動されるメソッド

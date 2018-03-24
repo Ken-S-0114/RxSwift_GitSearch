@@ -22,10 +22,12 @@ struct RepositoriesViewModel {
   // 監視対象の変数初期化処理(イニシャライザ)
   init(withNameObservable nameObservable: Observable<String>) {
     self.repositoryName = nameObservable
+
   }
   
   // GithubAPIへアクセスしデータを取得して, ViewController側のUI処理とバインドするためにDriverに変換をする処理
   fileprivate func fetchRepositories() -> Driver<[Repository]> {
+
     // Observableな変数に対して、「.subscribeOn」→「.observeOn」→「.observeOn」...という形で数珠つなぎで処理を実行
     return repositoryName
       
