@@ -15,7 +15,7 @@ class Repository: Mappable {
   var name: String!
   
   required init?(map: Map) {}
-  
+
   // ObjectMapperを利用したデータのマッピング
   func mapping(map: Map) {
     identifier <- map["id"]

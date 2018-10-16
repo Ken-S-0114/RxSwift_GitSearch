@@ -1,23 +1,23 @@
 PODS:
-  - Alamofire (4.6.0)
-  - Differentiator (3.0.2)
-  - ObjectMapper (3.1.0)
-  - RxAlamofire/Core (4.0.0):
+  - Alamofire (4.7.3)
+  - Differentiator (3.1.0)
+  - ObjectMapper (3.3.0)
+  - RxAlamofire/Core (4.3.0):
     - Alamofire (~> 4.5)
-    - RxSwift (~> 4.0)
-  - RxAlamofire/RxCocoa (4.0.0):
+    - RxSwift (~> 4)
+  - RxAlamofire/RxCocoa (4.3.0):
     - RxAlamofire/Core
-    - RxCocoa (~> 4.0)
-  - RxBlocking (4.1.1):
+    - RxCocoa (~> 4)
+  - RxBlocking (4.3.1):
     - RxSwift (~> 4.0)
-  - RxCocoa (4.1.1):
+  - RxCocoa (4.3.1):
     - RxSwift (~> 4.0)
-  - RxDataSources (3.0.2):
+  - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.1.1)
-  - RxTest (4.1.1):
+  - RxSwift (4.3.1)
+  - RxTest (4.3.1):
     - RxSwift (~> 4.0)
 
 DEPENDENCIES:
@@ -29,17 +29,29 @@ DEPENDENCIES:
   - RxSwift
   - RxTest
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Differentiator
+    - ObjectMapper
+    - RxAlamofire
+    - RxBlocking
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - RxTest
+
 SPEC CHECKSUMS:
-  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
-  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
-  RxAlamofire: 6ea579ac53bf14cb4bc7049a3866e5a769989b1d
-  RxBlocking: 22e7d7b86a1c0c42164a30d64f56f97128b4ffab
-  RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
-  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
-  RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
-  RxTest: f934010a5b07ecd627cb70b38eb4baf0414591d2
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  RxAlamofire: 09624d0f2d48ed8b686e4eb4cf68e28cbd2df556
+  RxBlocking: 64c051285261ca2339481e91b5f70eb06b03660a
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  RxTest: ea97a208826906f3904c0debdd09575ebcbfe216
 
 PODFILE CHECKSUM: e16e71f18d1b46994070d5164b49ab175eaa8192
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

@@ -98,21 +98,21 @@ final class RepositoryListController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillShow(_:)),
-      name: NSNotification.Name.UIKeyboardWillShow,
+      name: UIResponder.keyboardWillShowNotification,
       object: nil)
     
     // Case2. キーボードを閉じた場合のイベント
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillHide(_:)),
-      name: NSNotification.Name.UIKeyboardWillHide,
+      name: UIResponder.keyboardWillHideNotification,
       object: nil)
   }
   
   // キーボード表示時に発動されるメソッド
   @objc private func keyboardWillShow(_ notification: Notification) {
     // キーボードのサイズを取得する
-    guard let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+    guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
       return
     }
     // 一覧表示用テーブルビューのAutoLayoutの制約を更新して高さをキーボード分だけ縮める

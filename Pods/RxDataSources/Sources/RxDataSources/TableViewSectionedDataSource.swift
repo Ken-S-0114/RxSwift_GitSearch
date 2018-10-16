@@ -155,7 +155,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
         }
     }
 
-    open var rowAnimation: UITableViewRowAnimation = .automatic
+    open var rowAnimation: UITableView.RowAnimation = .automatic
 
     #if os(iOS)
     open var sectionIndexTitles: SectionIndexTitles {
